@@ -24,7 +24,7 @@ class PointsController {
             }
         })
 
-        return response.json(points)
+        return response.json(serializedPoints)
     }
 
     async show (request: Request, response: Response) {
@@ -79,13 +79,15 @@ class PointsController {
     
         const pointItems = items
             .split(',')
-            .map((item: string) => items.trim())
+            .map((item: string) => item.trim())
             .map((item_id: number) => {
                 return {
                     item_id,
                     point_id
                 }
             })
+
+            console.log(pointItems)
     
         await trx('points_items').insert(pointItems)
 
